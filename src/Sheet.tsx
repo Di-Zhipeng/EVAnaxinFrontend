@@ -1,12 +1,12 @@
 import React from 'react';
 import '../node_modules/antd/dist/antd.css';
-import { Layout, Breadcrumb, Button, Form, Input, Checkbox, InputNumber, Select, Radio, Icon, Row, Col, message, Modal, Popconfirm, BackTop, Tooltip } from 'antd';
-
+import { Typography , Layout, Breadcrumb, Button, Form, Input, Checkbox, InputNumber, Select, Radio, Icon, Row, Col, message, Modal, Popconfirm, BackTop, Tooltip } from 'antd';
+import background from "./background2.jpg";
 const apiBaseUrl = ''
 const { Header, Footer, Sider, Content } = Layout;
 const FormItem = Form.Item;
 const { confirm } = Modal;
-
+const { Title } = Typography;
 class SheetStatus {
   constructor() {
     this.available = true;
@@ -283,364 +283,365 @@ class SignUpForm extends React.Component<FormProps, any> {
 
     return (
 
-      <Layout >
-        <Header style={{
-          backgroundColor: '#171738'
+      <Layout style={{
+        backgroundImage:`url(${background})`
+      }}>
+        <Content style={{
+          opacity:0.8
         }}>
+          <div style={{ background: '#fff', padding: 48, marginTop:48,marginLeft: 100, marginRight: 100, border: 24 }}>
+            <Title style={{
+              textAlign:'center'
+            }}>
+              浙江大学学生E志者协会2019年秋季纳新报名表</Title>
+            <p><br /></p>
+            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+              <Form.Item
+                label="姓名">
+                {getFieldDecorator('name', {
+                  rules: [{ required: true, message: '请在此处填入你的姓名' }],
+                })(<Input />)}
+              </Form.Item>
 
-          <p style={{
-            fontSize: 24,
-            fontWeight: 500,
-            color: '#fff',
-          }}>
-            
-            浙江大学学生E志者协会
-        </p></Header>
-        <Content style={{ padding: '0 50px' }}>
-
-          <div style={{ background: '#fff', padding: 24, margin: 24, border: 24, minHeight: 280 }}> <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-            <Form.Item
-              label="姓名">
-              {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请在此处填入你的姓名' }],
-              })(<Input />)}
-            </Form.Item>
-
-            <Form.Item label="学号" >
-              {getFieldDecorator('id', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请在此处填入你的学号',
-                  },
-                  { pattern: /^[0-9]+$/, message: "混进去了数字以外的东西呀" }
-
-                ],
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item label="性别">
-              {
-                getFieldDecorator('sex', {
+              <Form.Item label="学号" >
+                {getFieldDecorator('id', {
                   rules: [
                     {
                       required: true,
-                      message: '请选择你的性别'
-                    }
-                  ]
-                }
-                )
-                  (
-                    <Radio.Group>
-                      <Radio.Button value={0} ><div><Icon type="man" />男</div></Radio.Button>
-                      <Radio.Button value={1} ><div><Icon type="woman" />女</div></Radio.Button>
-                    </Radio.Group>
+                      message: '请在此处填入你的学号',
+                    },
+                    { pattern: /^[0-9]+$/, message: "混进去了数字以外的东西呀" }
+
+                  ],
+                })(<Input />)}
+              </Form.Item>
+              <Form.Item label="性别">
+                {
+                  getFieldDecorator('sex', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请选择你的性别'
+                      }
+                    ]
+                  }
                   )
-              }
-            </Form.Item>
-            <Form.Item label="年级">
-              {
-                getFieldDecorator('grade', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请选择你的年级'
-
-                    }
-                  ]
+                    (
+                      <Radio.Group>
+                        <Radio.Button value={0} ><div><Icon type="man" />男</div></Radio.Button>
+                        <Radio.Button value={1} ><div><Icon type="woman" />女</div></Radio.Button>
+                      </Radio.Group>
+                    )
                 }
-                )
-                  (
-                    <Radio.Group >
-                      <Radio.Button value={1}>大一</Radio.Button>
-                      <Radio.Button value={2}>大二</Radio.Button>
-                      <Radio.Button value={3}>大三</Radio.Button>
-                      <Radio.Button value={4}>大四</Radio.Button>
-                    </Radio.Group>
+              </Form.Item>
+              <Form.Item label="年级">
+                {
+                  getFieldDecorator('grade', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请选择你的年级'
+
+                      }
+                    ]
+                  }
                   )
-              }
-            </Form.Item>
-            <Form.Item label="专业/大类">
-              {
-                getFieldDecorator('major', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请在这里填入你的专业'
+                    (
+                      <Radio.Group >
+                        <Radio.Button value={1}>大一</Radio.Button>
+                        <Radio.Button value={2}>大二</Radio.Button>
+                        <Radio.Button value={3}>大三</Radio.Button>
+                        <Radio.Button value={4}>大四</Radio.Button>
+                      </Radio.Group>
+                    )
+                }
+              </Form.Item>
+              <Form.Item label="专业/大类">
+                {
+                  getFieldDecorator('major', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请在这里填入你的专业'
 
-                    }
-                  ]
+                      }
+                    ]
+                  }
+                  )(
+                    <Input placeholder="例如：工科试验班(电气)" />
+                  )
                 }
-                )(
-                  <Input placeholder="例如：工科试验班(电气)" />
-                )
-              }
-            </Form.Item>
-            <Form.Item label="E-mail">
-              {getFieldDecorator('email', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请在此处填入你的E-mail'
-                  }, { type: 'email', message: "邮箱格式不正确" }
-                ],
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item label="联系电话">
-              {getFieldDecorator('phone', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请在此处填入你的电话号码',
-                  },
-                  { pattern: /^[0-9]+$/, message: "混进去了数字以外的东西呀" }
-                ],
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item label="第一志愿">
-              {getFieldDecorator('firstWish', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请选择你的第一志愿',
-                  },
-                ],
-              })(
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={1}>电器部</Radio.Button>
-                  <Radio.Button value={2}>电脑部</Radio.Button>
-                  <Radio.Button value={3}>文宣部</Radio.Button>
-                  <Radio.Button value={4}>人资部</Radio.Button>
-                  <Radio.Button value={5}>财外部</Radio.Button>
-                </Radio.Group>
-              )}
-            </Form.Item>
-            <Form.Item label="第二志愿">
-              {getFieldDecorator('secondWish', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请选择你的第二志愿',
-                  },
-                ],
-              })(
-                <Radio.Group buttonStyle="solid">
-                  <Radio.Button value={1}>电器部</Radio.Button>
-                  <Radio.Button value={2}>电脑部</Radio.Button>
-                  <Radio.Button value={3}>文宣部</Radio.Button>
-                  <Radio.Button value={4}>人资部</Radio.Button>
-                  <Radio.Button value={5}>财外部</Radio.Button>
-                </Radio.Group>
-              )}
-            </Form.Item>
-            <Form.Item label="是否服从调剂">
-              {
-                getFieldDecorator('adjustment', {
+              </Form.Item>
+              <Form.Item label="E-mail">
+                {getFieldDecorator('email', {
                   rules: [
                     {
                       required: true,
-                      message: '请选择是否服从调剂'
-                    }
-                  ]
-                }
-                )(
-                  <Radio.Group >
-                    <Radio value={true}>是</Radio>
-                    <Radio value={false}>否</Radio>
+                      message: '请在此处填入你的E-mail'
+                    }, { type: 'email', message: "邮箱格式不正确" }
+                  ],
+                })(<Input />)}
+              </Form.Item>
+              <Form.Item label="联系电话">
+                {getFieldDecorator('phone', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请在此处填入你的电话号码',
+                    },
+                    { pattern: /^[0-9]+$/, message: "混进去了数字以外的东西呀" }
+                  ],
+                })(<Input />)}
+              </Form.Item>
+              <Form.Item label="第一志愿">
+                {getFieldDecorator('firstWish', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请选择你的第一志愿',
+                    },
+                  ],
+                })(
+                  <Radio.Group buttonStyle="solid">
+                    <Radio.Button value={1}>电器部</Radio.Button>
+                    <Radio.Button value={2}>电脑部</Radio.Button>
+                    <Radio.Button value={3}>文宣部</Radio.Button>
+                    <Radio.Button value={4}>人资部</Radio.Button>
+                    <Radio.Button value={5}>财外部</Radio.Button>
                   </Radio.Group>
-                )
-              }
-            </Form.Item>
-            <Form.Item label="简述你选择第一志愿的原因">
-              {
-                getFieldDecorator('firstReason', {
+                )}
+              </Form.Item>
+              <Form.Item label="第二志愿">
+                {getFieldDecorator('secondWish', {
                   rules: [
                     {
                       required: true,
-                      message: '请填入你选择志愿的原因'
-                    }
-                  ]
+                      message: '请选择你的第二志愿',
+                    },
+                  ],
+                })(
+                  <Radio.Group buttonStyle="solid">
+                    <Radio.Button value={1}>电器部</Radio.Button>
+                    <Radio.Button value={2}>电脑部</Radio.Button>
+                    <Radio.Button value={3}>文宣部</Radio.Button>
+                    <Radio.Button value={4}>人资部</Radio.Button>
+                    <Radio.Button value={5}>财外部</Radio.Button>
+                  </Radio.Group>
+                )}
+              </Form.Item>
+              <Form.Item label="是否服从调剂">
+                {
+                  getFieldDecorator('adjustment', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请选择是否服从调剂'
+                      }
+                    ]
+                  }
+                  )(
+                    <Radio.Group >
+                      <Radio value={true}>是</Radio>
+                      <Radio value={false}>否</Radio>
+                    </Radio.Group>
+                  )
                 }
-                )(
-                  <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
-                )
-              }
-            </Form.Item>
-            <Form.Item label="简述你选择第二志愿的原因">
-              {
-                getFieldDecorator('secondReason', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请填入你选择志愿的原因'
-                    }
-                  ]
-                }
-                )
-                  (
+              </Form.Item>
+              <Form.Item label="简述你选择第一志愿的原因">
+                {
+                  getFieldDecorator('firstReason', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请填入你选择志愿的原因'
+                      }
+                    ]
+                  }
+                  )(
                     <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
                   )
-              }
-            </Form.Item>
-            <Form.Item label="简单介绍一下你的特长">
-              {
-                getFieldDecorator('question1', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请简单介绍一下你的特长'
-                    }
-                  ]
                 }
-                )
-                  (
-                    <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+              </Form.Item>
+              <Form.Item label="简述你选择第二志愿的原因">
+                {
+                  getFieldDecorator('secondReason', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请填入你选择志愿的原因'
+                      }
+                    ]
+                  }
                   )
-              }
-            </Form.Item>
-            <Form.Item label="你希望未来能在E志者协会得到什么？又能为E志付出什么？">
-              {
-                getFieldDecorator('question2', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请填入问题的回答'
-                    }
-                  ]
+                    (
+                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                    )
                 }
-                )
-                  (
-                    <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+              </Form.Item>
+              <Form.Item label="简单介绍一下你的特长">
+                {
+                  getFieldDecorator('question1', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请简单介绍一下你的特长'
+                      }
+                    ]
+                  }
                   )
-              }
-            </Form.Item>
-            <Form.Item label='选择你希望的面试时间吧（尽量多选）9月24日'>
-              {
-                getFieldDecorator('time1', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                    (
+                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                    )
                 }
-                )(
-
-                  <Checkbox.Group options={timeOptions1} />
-
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月25日'>
-              {
-                getFieldDecorator('time2', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+              </Form.Item>
+              <Form.Item label="你希望未来能在E志者协会得到什么？又能为E志付出什么？">
+                {
+                  getFieldDecorator('question2', {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请填入问题的回答'
+                      }
+                    ]
+                  }
+                  )
+                    (
+                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                    )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='选择你希望的面试时间吧（尽量多选）9月24日'>
+                {
+                  getFieldDecorator('time1', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions2} />
+                    <Checkbox.Group options={timeOptions1} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月26日'>
-              {
-                getFieldDecorator('time3', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                  )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='9月25日'>
+                {
+                  getFieldDecorator('time2', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions3} />
+                    <Checkbox.Group options={timeOptions2} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月27日'>
-              {
-                getFieldDecorator('time4', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                  )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='9月26日'>
+                {
+                  getFieldDecorator('time3', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions4} />
+                    <Checkbox.Group options={timeOptions3} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月28日'>
-              {
-                getFieldDecorator('time5', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                  )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='9月27日'>
+                {
+                  getFieldDecorator('time4', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions5} />
+                    <Checkbox.Group options={timeOptions4} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月29日'>
-              {
-                getFieldDecorator('time6', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                  )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='9月28日'>
+                {
+                  getFieldDecorator('time5', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions6} />
+                    <Checkbox.Group options={timeOptions5} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item label='9月30日'>
-              {
-                getFieldDecorator('time7', {
-                  rules: [
-                    {
-                      required: false,
-                      message: '请选择你希望的面试时间'
-                    }
-                  ]
+                  )
                 }
-                )(
+              </Form.Item>
+              <Form.Item label='9月29日'>
+                {
+                  getFieldDecorator('time6', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
-                  <Checkbox.Group options={timeOptions7} />
+                    <Checkbox.Group options={timeOptions6} />
 
-                )
-              }
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-              <Button icon="copy" style={{ textAlign: 'center' }} type="primary" htmlType="submit">提交</Button>
-              <Button icon="save" style={{ margin: "20px", textAlign: 'center' }} onClick={() => { this.saveLocalStorage(); message.success('草稿已保存') }}>保存草稿</Button>
-            </Form.Item>
-          </Form></div>
+                  )
+                }
+              </Form.Item>
+              <Form.Item label='9月30日'>
+                {
+                  getFieldDecorator('time7', {
+                    rules: [
+                      {
+                        required: false,
+                        message: '请选择你希望的面试时间'
+                      }
+                    ]
+                  }
+                  )(
 
+                    <Checkbox.Group options={timeOptions7} />
 
+                  )
+                }
+              </Form.Item>
+              <Form.Item {...tailFormItemLayout}>
+                <Button icon="copy" style={{ textAlign: 'center' }} type="primary" htmlType="submit">提交</Button>
+                <Button icon="save" style={{ margin: "20px", textAlign: 'center' }} onClick={() => { this.saveLocalStorage(); message.success('草稿已保存') }}>保存草稿</Button>
+              </Form.Item>
+            </Form></div>
+
+                
+          <p style={{
+            textAlign: 'center',
+          }}>
+          浙江大学学生E志者协会©2019 Created by EVATech  
+          </p>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>浙江大学学生E志者协会©2019 Created by EVATech</Footer>
       </Layout>
 
 
@@ -658,6 +659,7 @@ class Sheet extends React.Component<any, SheetState> {
     const WrappedForm = Form.create({})(SignUpForm);
     return (
       <div style={{ minHeight: "300px", alignContent: "center" }} className="form-panel">
+
         <WrappedForm />
         <BackTop visibilityHeight={200} />
       </div>
