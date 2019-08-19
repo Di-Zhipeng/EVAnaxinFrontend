@@ -1,6 +1,6 @@
 import React from 'react';
 import '../node_modules/antd/dist/antd.css';
-import { Typography , Layout, Breadcrumb, Button, Form, Input, Checkbox, InputNumber, Select, Radio, Icon, Row, Col, message, Modal, Popconfirm, BackTop, Tooltip } from 'antd';
+import { Typography, Layout, Breadcrumb, Button, Form, Input, Checkbox, InputNumber, Select, Radio, Icon, Row, Col, message, Modal, Popconfirm, BackTop, Tooltip } from 'antd';
 import background from "./background2.jpg";
 const apiBaseUrl = ''
 const { Header, Footer, Sider, Content } = Layout;
@@ -173,15 +173,24 @@ class SignUpForm extends React.Component<FormProps, any> {
           formProps.validateFieldsAndScroll((err: any, values: SheetData) => {
             if (!err) {
               let dto = new SheetDto(values);
-              fetch(apiBaseUrl + 'submit', {
+              fetch('http://localhost:5000/api/submit', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(dto)
-              }).then(res => {
-                message.success('提交成功！');
+              }).then(async (res: any) => {
+                if (res.ok) {
+                  let body = await res.json();
+                  if (body.success === 1) {
+                    message.success('提交成功！');
+                  }
+                  else {
+                    message.error('提交失败，可能为网络原因。无法解决的话请马上联系我们ヽ(*ﾟдﾟ)ノｶｲﾊﾞｰ');
+                  }
+                }
+
                 resolve(42);
               }).catch(err => {
                 message.error('提交失败，可能为网络原因。无法解决的话请马上联系我们ヽ(*ﾟдﾟ)ノｶｲﾊﾞｰ');
@@ -284,14 +293,14 @@ class SignUpForm extends React.Component<FormProps, any> {
     return (
 
       <Layout style={{
-        backgroundImage:`url(${background})`
+        backgroundImage: `url(${background})`
       }}>
         <Content style={{
-          opacity:0.8
+          opacity: 0.8
         }}>
-          <div style={{ background: '#fff', padding: 48, marginTop:48,marginLeft: 100, marginRight: 100, border: 24 }}>
+          <div style={{ background: '#fff', padding: 48, marginTop: 48, marginLeft: 100, marginRight: 100, border: 24 }}>
             <Title style={{
-              textAlign:'center'
+              textAlign: 'center'
             }}>
               浙江大学学生E志者协会2019年秋季纳新报名表</Title>
             <p><br /></p>
@@ -635,11 +644,11 @@ class SignUpForm extends React.Component<FormProps, any> {
               </Form.Item>
             </Form></div>
 
-                
+
           <p style={{
             textAlign: 'center',
           }}>
-          浙江大学学生E志者协会©2019 Created by EVATech  
+            浙江大学学生E志者协会©2019 Created by EVATech
           </p>
         </Content>
       </Layout>
