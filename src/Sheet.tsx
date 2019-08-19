@@ -1,6 +1,6 @@
 import React from 'react';
 import '../node_modules/antd/dist/antd.css';
-import { Typography, Layout, Breadcrumb, Button, Form, Input, Checkbox, InputNumber, Select, Radio, Icon, Row, Col, message, Modal, Popconfirm, BackTop, Tooltip } from 'antd';
+import { Typography, Layout,  Button, Form, Input, Checkbox, Radio, Icon,  message, Modal,  BackTop} from 'antd';
 import background from "./background2.jpg";
 const apiBaseUrl = ''
 const { Header, Footer, Sider, Content } = Layout;
