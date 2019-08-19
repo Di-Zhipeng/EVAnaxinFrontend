@@ -173,7 +173,7 @@ class SignUpForm extends React.Component<FormProps, any> {
           formProps.validateFieldsAndScroll((err: any, values: SheetData) => {
             if (!err) {
               let dto = new SheetDto(values);
-              fetch('http://localhost:5000/api/submit', {
+              fetch('https://joinus-backend.zjueva.net/api/submit', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
