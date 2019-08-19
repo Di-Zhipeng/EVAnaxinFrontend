@@ -298,7 +298,7 @@ class SignUpForm extends React.Component<FormProps, any> {
         <Content style={{
           opacity: 0.8
         }}>
-          <div style={{ background: '#fff', padding: 48, marginTop: 48, marginLeft: 100, marginRight: 100, border: 24 }}>
+          <div style={{ background: '#fff', padding: 48, marginTop: 48, marginLeft: 48, marginRight: 48, border: 24 }}>
             <Title style={{
               textAlign: 'center'
             }}>
