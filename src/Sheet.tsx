@@ -1,6 +1,6 @@
 import React from 'react';
 import '../node_modules/antd/dist/antd.css';
-import { Typography, Layout,  Button, Form, Input, Checkbox, Radio, Icon,  message, Modal,  BackTop} from 'antd';
+import { Typography, Layout, Button, Form, Input, Checkbox, Radio, Icon, message, Modal, BackTop } from 'antd';
 import background from "./background2.jpg";
 const apiBaseUrl = ''
 const { Header, Footer, Sider, Content } = Layout;
@@ -17,7 +17,7 @@ class SheetStatus {
 class SheetData {
   constructor() {
     this.adjustment = false;
-    this.time1 = this.time2 = this.time3 = this.time4 = this.time5 = this.time6 = this.time7 = []
+    this.time1 = this.time2 = this.time3 = this.time4 = this.time5 = this.time6 = this.time7 = [0]
     this.name = this.id = this.major = this.email = this.phone = this.firstReason = this.secondReason = this.question1 = this.question2 = '';
     this.firstWish = this.secondWish = this.sex = this.grade = -1;
   }
@@ -114,13 +114,13 @@ let a: SheetData = {
   secondReason: '',
   question1: '',
   question2: '',
-  time1: [],
-  time2: [],
-  time3: [],
-  time4: [],
-  time5: [],
-  time6: [],
-  time7: []
+  time1: [0],
+  time2: [0],
+  time3: [0],
+  time4: [0],
+  time5: [0],
+  time6: [0],
+  time7: [0]
 };
 let b: SheetStatus = {
   available: true
@@ -184,16 +184,18 @@ class SignUpForm extends React.Component<FormProps, any> {
                 if (res.ok) {
                   let body = await res.json();
                   if (body.success === 1) {
-                    message.success('提交成功！');
+                    message.success('提交成功！后续的面试时间会以短信形式通知，期待你的加入！');
                   }
                   else {
-                    message.error('提交失败，可能为网络原因。无法解决的话请马上联系我们ヽ(*ﾟдﾟ)ノｶｲﾊﾞｰ');
+                    message.error('提交失败，可能为网络原因。');
                   }
                 }
-
+                else {
+                  message.error('提交失败，可能为网络原因。')
+                }
                 resolve(42);
               }).catch(err => {
-                message.error('提交失败，可能为网络原因。无法解决的话请马上联系我们ヽ(*ﾟдﾟ)ノｶｲﾊﾞｰ');
+                message.error('提交失败，可能为网络原因。');
                 reject('network or fetch error!');
               });
             } else {
@@ -298,10 +300,10 @@ class SignUpForm extends React.Component<FormProps, any> {
         <Content style={{
           opacity: 0.8
         }}>
-          <div style={{ background: '#fff', padding: 48, marginTop: 48, marginLeft: 48, marginRight: 48, border: 24 }}>
-            <Title style={{
+          <div style={{ background: '#fff', paddingTop: 48,paddingLeft:24,paddingRight:24, marginTop: 24, marginLeft: 24, marginRight: 24 }}>
+            <Title level={2} style={{
               textAlign: 'center'
-            }}>
+            }} >
               浙江大学学生E志者协会2019年秋季纳新报名表</Title>
             <p><br /></p>
             <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -402,7 +404,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   ],
                 })(<Input />)}
               </Form.Item>
-              <Form.Item label="第一志愿">
+              <Form.Item label="第一志愿（两志愿请不要重复选择）">
                 {getFieldDecorator('firstWish', {
                   rules: [
                     {
@@ -420,7 +422,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   </Radio.Group>
                 )}
               </Form.Item>
-              <Form.Item label="第二志愿">
+              <Form.Item label="第二志愿（请不要同时选择电脑、电器部）">
                 {getFieldDecorator('secondWish', {
                   rules: [
                     {
@@ -519,7 +521,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                     )
                 }
               </Form.Item>
-              <Form.Item label='选择你希望的面试时间吧（尽量多选）9月24日'>
+              {/* <Form.Item label='选择你希望的面试时间吧（尽量多选）9月24日'>
                 {
                   getFieldDecorator('time1', {
                     rules: [
@@ -637,7 +639,7 @@ class SignUpForm extends React.Component<FormProps, any> {
 
                   )
                 }
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item {...tailFormItemLayout}>
                 <Button icon="copy" style={{ textAlign: 'center' }} type="primary" htmlType="submit">提交</Button>
                 <Button icon="save" style={{ margin: "20px", textAlign: 'center' }} onClick={() => { this.saveLocalStorage(); message.success('草稿已保存') }}>保存草稿</Button>
