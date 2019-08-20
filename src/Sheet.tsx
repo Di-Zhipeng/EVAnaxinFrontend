@@ -469,7 +469,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                     ]
                   }
                   )(
-                    <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                    <Input.TextArea rows={4} />
                   )
                 }
               </Form.Item>
@@ -485,7 +485,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   }
                   )
                     (
-                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                      <Input.TextArea rows={4} />
                     )
                 }
               </Form.Item>
@@ -501,7 +501,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   }
                   )
                     (
-                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                      <Input.TextArea rows={4} />
                     )
                 }
               </Form.Item>
@@ -517,7 +517,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   }
                   )
                     (
-                      <Input.TextArea autosize={{ minRows: 2, maxRows: 8 }} />
+                      <Input.TextArea rows={4} />
                     )
                 }
               </Form.Item>
