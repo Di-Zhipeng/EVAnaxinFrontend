@@ -404,7 +404,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   ],
                 })(<Input />)}
               </Form.Item>
-              <Form.Item label="第一志愿（两志愿请不要重复选择）">
+              <Form.Item label="第一志愿（两个志愿请不要选择同一部门）">
                 {getFieldDecorator('firstWish', {
                   rules: [
                     {
@@ -422,7 +422,7 @@ class SignUpForm extends React.Component<FormProps, any> {
                   </Radio.Group>
                 )}
               </Form.Item>
-              <Form.Item label="第二志愿（请不要同时选择电脑、电器部）">
+              <Form.Item label="第二志愿（两个志愿请不要均在技术部（即电器、电脑部）中选择）">
                 {getFieldDecorator('secondWish', {
                   rules: [
                     {
@@ -489,13 +489,13 @@ class SignUpForm extends React.Component<FormProps, any> {
                     )
                 }
               </Form.Item>
-              <Form.Item label="简单介绍一下你的特长">
+              <Form.Item label="个人简介（包括编程经验、竞赛获奖、特长、兴趣、社团经历、爱好、性格等方面）">
                 {
                   getFieldDecorator('question1', {
                     rules: [
                       {
                         required: true,
-                        message: '请简单介绍一下你的特长'
+                        message: '请简单介绍一下你自己'
                       }
                     ]
                   }
